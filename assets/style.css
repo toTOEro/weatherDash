@@ -13,6 +13,11 @@ li {
     list-style: none;
 }
 
+img {
+    height:100px;
+
+}
+
 
 .citySelector {
     height: 100vh;

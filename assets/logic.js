@@ -133,9 +133,9 @@ function renderWeather(data) {
         const headerEl = document.createElement("div");
         const cardBodyEl = document.createElement("div");
         const cardInfoEl = document.createElement("ul");
-        cardEl.classList.add("card", "flex-fill");
-        headerEl.classList.add("card-header", "bg-secondary", "text-white");
-        cardBodyEl.classList.add("card-body");
+        cardEl.classList.add("card", "flex-fill", "mx-2");
+        headerEl.classList.add("card-header", "bg-secondary", "text-white", "h3");
+        cardBodyEl.classList.add("card-body", "lead", "font-weight-bold");
         cardInfoEl.classList.add("card-text")
         const currentInfo = dailyInfo[i];
         headerEl.innerHTML = `${date[i].date} <img src="http://openweathermap.org/img/w/${date[i].icon}.png" alt="Icon indicating ${date[i].description}" style="font-size: 1rem">`;
@@ -171,7 +171,6 @@ function saveHistory(city) {
         searchHistoryBt.value = city;
         searchHistoryBt.addEventListener('click', searchHistory)
         cityHistoryEl.appendChild(searchHistoryBt);
-        console.log({searchedCities})
     };
 };
 
@@ -198,12 +197,11 @@ function searchCity(event) {
 // Search City History Function for the history buttons
 function searchHistory (event) {
     event.preventDefault();
-    console.log(event)
     city = fixCapitalization(event.target.value);
     var apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city},US&appid=${apiKey}`;
     openweatherAPI(apiURL);
 }
 
-// Add event listeners for buttons
-searchBt.addEventListener('click', searchCity)
+// Add event listeners for main search button
+searchBt.addEventListener('click', searchCity);
 

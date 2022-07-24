@@ -8,6 +8,7 @@ var apiKey = '8c23fe974a76c1318a70cd6439fe8072'
 var todayHeaderEl = document.getElementById('today');
 var todayWeatherEl = document.getElementById('todayWeather');
 var city = "";
+var searchedCities = [];
 
 
 // OpenWeather API Call
@@ -62,7 +63,7 @@ function renderWeather(data) {
     var currentWeather = data.current;
     var dailyWeather = data.daily;
     var icon = currentWeather.weather[0].icon;
-    var weatherID = currentWeather.weather[0].id;
+    var iconDescription = currentWeather.weather[0].description;
     var dailyInfo = [];
     var date = [];
     var iconURL = `http://openweathermap.org/img/w/${icon}.png`
@@ -74,7 +75,7 @@ function renderWeather(data) {
     currentCityEl.setAttribute("class", "border border-dark my-4")
 
 
-    todayHeaderEl.innerHTML = `Today's weather in <i class="font-weight-bold font-italic">${city}</i>  <img src="${iconURL}">`;
+    todayHeaderEl.innerHTML = `Today's weather in <i class="font-weight-bold font-italic">${city}</i>  <img src="${iconURL}" alt="Icon indicating ${iconDescription}" style="font-size: 1rem">`;
 
     const todayData = {
         Temp: currentWeather.feels_like + " °F",
@@ -113,20 +114,18 @@ function renderWeather(data) {
     // Iterating over dailyWeather to pull 5 day forecast
     for (let i = 1; i < 6; i++) {
         const dailyData = {
-            minTemp: dailyWeather[i].temp.min,
-            maxTemp: dailyWeather[i].temp.max,
-            Humidity: dailyWeather[i].humidity,
-            UV: dailyWeather[i].uvi,
+            "Expected High": dailyWeather[i].temp.min,
+            "Expected Low": dailyWeather[i].temp.max,
+            Humidity: dailyWeather[i].humidity + "%",
         };
         const dailyDate = {
             date: moment.unix(dailyWeather[i].dt).format("ddd, MM/DD/YYYY"),
+            icon: dailyWeather[i].weather[0].icon,
+            description: dailyWeather[i].weather[0].description,
         }
         dailyInfo.push(dailyData);
         date.push(dailyDate);
-        console.log(date)
     };
-
-    console.log(dailyWeather)
 
     // Iterates over 5 day forecast to generate forecast cards
     for (let i = 0; i < dailyInfo.length; i++) {
@@ -139,8 +138,7 @@ function renderWeather(data) {
         cardBodyEl.classList.add("card-body");
         cardInfoEl.classList.add("card-text")
         const currentInfo = dailyInfo[i];
-        headerEl.textContent = date[i].date;
-        // Create list
+        headerEl.innerHTML = `${date[i].date} <img src="http://openweathermap.org/img/w/${date[i].icon}.png" alt="Icon indicating ${date[i].description}" style="font-size: 1rem">`;
 
         for (const [key, value] of Object.entries(currentInfo)) {
             const cardInfoLi = document.createElement("li");
@@ -165,13 +163,17 @@ function clearChildrenNodes(parent) {
 
 // Saves search history by generating a button
 function saveHistory(city) {
-    var searchHistoryBt = document.createElement("button");
-    searchHistoryBt.setAttribute("class", "btn btn-primary my-2 flex-fill");
-    searchHistoryBt.textContent = city;
-
-    cityHistoryEl.appendChild(searchHistoryBt);
-    console.log({ cityHistoryEl })
-}
+    if (!searchedCities.includes(city)) {
+        var searchHistoryBt = document.createElement("button");
+        searchedCities.push(city);
+        searchHistoryBt.setAttribute("class", "btn btn-primary my-2 flex-fill");
+        searchHistoryBt.textContent = city;
+        searchHistoryBt.value = city;
+        searchHistoryBt.addEventListener('click', searchHistory)
+        cityHistoryEl.appendChild(searchHistoryBt);
+        console.log({searchedCities})
+    };
+};
 
 // Corrects capitalization 
 function fixCapitalization(word) {
@@ -191,9 +193,16 @@ function searchCity(event) {
     var apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city},US&appid=${apiKey}`;
     openweatherAPI(apiURL);
     saveHistory(city);
-
 };
 
+// Search City History Function for the history buttons
+function searchHistory (event) {
+    event.preventDefault();
+    console.log(event)
+    city = fixCapitalization(event.target.value);
+    var apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city},US&appid=${apiKey}`;
+    openweatherAPI(apiURL);
+}
 
 // Add event listeners for buttons
 searchBt.addEventListener('click', searchCity)

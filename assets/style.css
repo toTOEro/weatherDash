@@ -1,13 +1,18 @@
+* {
+    font-family: 'Montserrat';
+
+}
 
 
 
 
-
+li {
+    list-style: none;
+}
 
 
 .citySelector {
 
-    width: 250px;
     height: 100vh;
 
 }
@@ -15,4 +20,8 @@
 .border-right {
     border-right: 4px dashed #dee2e6!important;
 
+}
+
+#searchNav {
+    padding-left: 15px;
 }

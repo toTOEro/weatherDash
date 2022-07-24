@@ -25,36 +25,95 @@
         </div>
 
     </header>
-    <!-- Search bar aside w/ city history -->
-    <aside id="searchNav" class="d-flex flex-column flex-shrink-0 citySelector border-right  mt-3 col-4 col-lg-2">
-        <div class="container-fluid">
-            <form class="d-flex flex-column">
-                <input id="searchedCity" class="form-control me-2" type="search" placeholder="Pick a city!">
-                <button id="citySearch" class="btn btn-secondary mt-2">Search</button>
+    <div class="d-flex flex-row">
+        <!-- Search bar aside w/ city history -->
+        <aside id="searchNav" class="d-flex flex-column flex-shrink-0 citySelector border-right  mt-3 col-4 col-lg-2">
+            <div class="container-fluid px-0">
+                <form class="d-flex flex-column">
+                    <input id="searchedCity" class="form-control me-2" type="search" placeholder="Pick a city!">
+                    <button id="citySearch" class="btn btn-secondary mt-2">Search</button>
 
-            </form>
-        </div>
-        <br />
-        <ul id="cityHistory" class="d-flex flex-column">
-            <li class="btn btn-primary my-2">test</li>
-            <li class="btn btn-primary my-2">test</li>
-        </ul>
-    </aside>
+                </form>
+            </div>
+            <br />
+            <ul id="cityHistory" class="d-flex flex-column">
+                <li class="btn btn-primary my-2">test</li>
+                <li class="btn btn-primary my-2">test</li>
+            </ul>
+        </aside>
 
-    <!-- Main weather display -->
-    <section id="mainWeather" class="col-10 col-lg-10">
-        <!-- Current City weather -->
-        <div id="currentCity">
-            
+        <!-- Main weather display -->
+        <section id="mainWeather" class="col-8 col-lg-10">
+            <!-- Current City weather -->
+            <div id="currentCity" class="d-none">
 
-        </div>
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container ml-0">
+                        <h1 id="today" class="display-4">Today's weather</h1>
+                        <ul id="todayWeather" class="lead">
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-        <!-- 5 day forecast -->
-        <div id="forecast">
+            <!-- 5 day forecast -->
+            <div id="forecast" class="d-flex flex-row">
+                <div class="card">
+                    <div class="card-header">
+                        Featured
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        Featured
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        Featured
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        Featured
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        Featured
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
 
-        </div>
-    </section>
 
+            </div>
+        </section>
+    </div>>
 
 </body>
 

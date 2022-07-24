@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/reset.css">
+    <!-- Link bootsrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+
+
+
+<body>
+    <!-- Main header -->
+    <header>
+
+        <div class="container text-center bg-primary mw-100 mh-50 pb-3 pt-3">
+            <h1 class="align-self-center">Weather Dashboard</h1>
+
+        </div>
+
+    </header>
+    <!-- Search bar aside w/ city history -->
+    <aside class="d-flex flex-column flex-shrink-0 citySelector mt-3 border-right">
+        <div class="container-fluid">
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Pick a city!">
+                <button class="btn">Search</button>
+
+            </form>
+
+
+        </div>
+        <ul id="cityHistory">
+            <li>test</li>
+            <li>test</li>
+        </ul>
+    </aside>
+
+    <!-- Main weather display -->
+    <section>
+        <!-- City Current weather -->
+        <div>
+
+
+        </div>
+
+        <!-- 5 day forecast -->
+    </section>
+
+
+</body>
+
+<script src="./assets/logic.js"></script>
+
+</html>

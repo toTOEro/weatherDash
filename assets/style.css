@@ -14,7 +14,7 @@ li {
 }
 
 img {
-    height:100px;
+    height: 100px;
 
 }
 
@@ -24,10 +24,17 @@ img {
 }
 
 .border-right {
-    border-right: 4px dashed #dee2e6!important;
+    border-right: 4px dashed #dee2e6 !important;
 
 }
 
 #searchNav {
     padding-left: 15px;
+}
+
+#errorAlert {
+    z-index: 100;
+    width:100%;
+    position: fixed;
+
 }

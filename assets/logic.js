@@ -7,9 +7,9 @@ var searchedCity = document.getElementById('searchedCity');
 var apiKey = '8c23fe974a76c1318a70cd6439fe8072'
 var todayHeaderEl = document.getElementById('today');
 var todayWeatherEl = document.getElementById('todayWeather');
+var errorAlertEl = document.getElementById('errorAlert')
 var city = "";
 var searchedCities = [];
-
 
 // OpenWeather API Call
 function openweatherAPI(URL) {
@@ -28,10 +28,21 @@ function openweatherAPI(URL) {
     // The following function was inspired by: https://dev.to/ramonak/javascript-how-to-access-the-return-value-of-a-promise-object-1bck
     async function getWeather() {
         const geoData = await geocodeFetch
-        var lat = geoData[0].lat;
-        var lon = geoData[0].lon;
-        weatherDataAPI(lat, lon);
+        if (geoData.length) {
+            var lat = geoData[0].lat;
+            var lon = geoData[0].lon;
+            saveHistory(city);
+            weatherDataAPI(lat, lon);
+        } else {
+            errorAlertEl.innerHTML = `<div class="alert alert-danger alert-dismissible m-0 text-center" role="alert">
+                Error! Specified city does not exist!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>`
 
+            return;
+        };
     };
 
     getWeather();
@@ -66,7 +77,7 @@ function renderWeather(data) {
     var iconDescription = currentWeather.weather[0].description;
     var dailyInfo = [];
     var date = [];
-    var iconURL = `http://openweathermap.org/img/w/${icon}.png`
+    var iconURL = `https://openweathermap.org/img/w/${icon}.png`
     clearChildrenNodes(todayWeatherEl);
     clearChildrenNodes(forecastEl);
 
@@ -138,7 +149,7 @@ function renderWeather(data) {
         cardBodyEl.classList.add("card-body", "lead", "font-weight-bold");
         cardInfoEl.classList.add("card-text")
         const currentInfo = dailyInfo[i];
-        headerEl.innerHTML = `${date[i].date} <img src="http://openweathermap.org/img/w/${date[i].icon}.png" alt="Icon indicating ${date[i].description}" style="font-size: 1rem">`;
+        headerEl.innerHTML = `${date[i].date} <img src="https://openweathermap.org/img/w/${date[i].icon}.png" alt="Icon indicating ${date[i].description}" style="font-size: 1rem">`;
 
         for (const [key, value] of Object.entries(currentInfo)) {
             const cardInfoLi = document.createElement("li");
@@ -176,7 +187,7 @@ function saveHistory(city) {
 
 // Corrects capitalization 
 function fixCapitalization(word) {
-    words = word.toLowerCase();
+    var words = word.toLowerCase();
     splitWords = words.split(" ");
     for (let i = 0; i < splitWords.length; i++) {
         splitWords[i] = splitWords[i][0].toUpperCase() + splitWords[i].substr(1);
@@ -189,16 +200,15 @@ function fixCapitalization(word) {
 function searchCity(event) {
     event.preventDefault();
     city = fixCapitalization(searchedCity.value);
-    var apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city},US&appid=${apiKey}`;
+    var apiURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city},US&appid=${apiKey}`;
     openweatherAPI(apiURL);
-    saveHistory(city);
 };
 
 // Search City History Function for the history buttons
-function searchHistory (event) {
+function searchHistory(event) {
     event.preventDefault();
     city = fixCapitalization(event.target.value);
-    var apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city},US&appid=${apiKey}`;
+    var apiURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city},US&appid=${apiKey}`;
     openweatherAPI(apiURL);
 }
 
